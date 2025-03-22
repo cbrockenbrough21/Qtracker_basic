@@ -1,0 +1,7 @@
+# Always use LF line endings in text files
+* text=auto eol=lf
+
+# Explicitly handle common file types
+*.py text eol=lf
+*.sh text eol=lf
+*.md text eol=lf
