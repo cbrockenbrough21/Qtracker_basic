@@ -29,6 +29,7 @@ Ensure that your dataset can be reliably organized into single-track data with i
    - `momentum_training-2.root` (for mu- momentum training)
 
 ## Model Training
+Now go into the training_scripts directory
 
 ### 1. Training the Track Finder
 ```sh
@@ -46,7 +47,7 @@ Store the resulting models in the `QTracker_basic/models` directory.
 ## Testing the Tracker
 To test the trained models on a dataset:
 ```sh
-python3 QTracker_test.py JPsi_Dump.root
+python3 QTracker_basic.py JPsi_Dump.root
 ```
 This will generate:
 - `qtracker_reco.root` (Reconstructed output file)
@@ -58,11 +59,19 @@ python3 imass_plot.py qtracker_reco.root
 ```
 This script will plot the mass spectrum of your reconstructed events.
 
+
+After running the tracker and producing the output root file (qtracker_reco.root)
+you can use it to train the Chi-Squared model which is used to evaluate the reconstruction
+of a track based on hit information in the Hit Array and the momentum information.
+Go back into the training_scripts directory and produce the Quality Metric Model.
 ### 2. Training the Quality Metric Model (Chi-Squared Method)
 ```sh
 python3 Qmetric_training.py qtracker_reco.root
 ```
-
+Once training is complete move the chi2_predictor_model.h5 to the QTracker_basic/models.
+Change the flag in Qtracker_basic.py in the process_data function to True.
+def process_data(root_file, output_file="tracker_output.root", use_chi2_model=True)
+If you don't have chi2_predictor_model.h5 or don't need it, then leave use_chi2_model=False.
 ## Notes
 - Ensure that your dataset follows the expected RUS format before processing.
 - The trained models should be stored in the correct directory (`QTracker_basic/models`) for proper operation.
