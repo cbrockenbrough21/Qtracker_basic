@@ -21,7 +21,7 @@ The script performs the following steps:
 2. **Track Finding**: Uses a pre-trained TensorFlow model to predict hit arrays for muon tracks (mu+ and mu-).
 3. **Hit Array Refinement**: Refines the predicted hit arrays by matching them with actual hits from the input data.
 4. **Momentum Prediction**: Predicts the momentum (px, py, pz) for each track using refined hit arrays.
-5. **Chi-Squared Prediction**: Estimates the χ² values for the reconstructed tracks.
+5. **Chi-Squared Prediction (Qmetric)**: Estimates the χ² values for the reconstructed tracks (Qaulity Metric or Qmetric).
 6. **Output**: Writes the refined hit arrays, predicted momenta, and χ² values to a new ROOT file, preserving the original data.
 
 ---
@@ -86,7 +86,7 @@ The script uses the following pre-trained models:
 - `track_finder.h5`: For track finding (predicting hit arrays).
 - `mom_mup.h5`: For predicting momentum of mu+ tracks.
 - `mom_mum.h5`: For predicting momentum of mu- tracks.
-- `chi2_predictor_model.h5`: For predicting χ² values.
+- `chi2_predictor_model.h5`: For predicting χ² values which is use as a track quality metric.
 
 Ensure these models are located in the `./models/` directory or update the paths in the script.
 
